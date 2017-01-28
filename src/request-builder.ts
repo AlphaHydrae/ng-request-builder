@@ -7,7 +7,7 @@ export class RequestBuilder {
   private requestUrl: string;
   private requestOptions: RequestOptions;
 
-  constructor(http: Http) {
+  constructor(http?: Http) {
     this.http = http;
     this.requestOptions = new RequestOptions({
       headers: new Headers(),

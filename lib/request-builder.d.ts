@@ -4,7 +4,7 @@ export declare class RequestBuilder {
     private http;
     private requestUrl;
     private requestOptions;
-    constructor(http: Http);
+    constructor(http?: Http);
     readonly options: RequestOptions;
     method(method: string): RequestBuilder;
     url(url: string): RequestBuilder;
