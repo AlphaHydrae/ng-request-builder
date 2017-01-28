@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "experimentalDecorators": true,
     "lib": ["es6", "dom"],
     "module": "es6",
     "moduleResolution": "node",
