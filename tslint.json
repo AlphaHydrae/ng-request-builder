@@ -1,0 +1,7 @@
+{
+  "extends": "tslint:latest",
+  "rules": {
+    "quotemark": [true, "single", "jsx-double", "avoid-escape"],
+    "trailing-comma": [true, {"multiline": "never", "singleline": "never"}]
+  }
+}
