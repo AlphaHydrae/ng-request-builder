@@ -1,25 +1,102 @@
-# Using this module in other modules
+# Angular Request Builder
 
-Here is a quick example of how this module can be used in other modules. The [TypeScript Module Resolution Logic](https://www.typescriptlang.org/docs/handbook/module-resolution.html) makes it quite easy. The file `src/index.ts` acts as an aggregator of all the functionality in this module. It imports from other files and re-exports to provide a unified interface for this module. The _package.json_ file contains `main` attribute that points to the generated `lib/index.js` file and `typings` attribute that points to the generated `lib/index.d.ts` file.
-
-> If you are planning to have code in multiple files (which is quite natural for a NodeJS module) that users can import, make sure you update `src/index.ts` file appropriately.
-
-Now assuming you have published this amazing module to _npm_ with the name `my-amazing-lib`, and installed it in the module in which you need it -
-
-- To use the `Greeter` class in a TypeScript file -
-
-```ts
-import { Greeter } from "my-amazing-lib";
-
-const greeter = new Greeter("World!");
-greeter.greet();
-```
-
-- To use the `Greeter` class in a JavaScript file -
+> A chainable HTTP request builder for Angular.
 
 ```js
-const Greeter = require('my-amazing-lib').Greeter;
+import { Injectable } from '@angular/core';
+import { RequestBuilderService } from 'ng-request-builder';
 
-const greeter = new Greeter('World!');
-greeter.greet();
+@Injectable()
+export class MyService {
+
+  constructor(private requestBuilderService: RequestBuilderService) {
+  }
+
+  public doStuff() {
+    this.requestBuilderService
+      .request('http://example.com')
+      .setHeader('Authorization', 'Bearer secret')
+      .setSearchParam('offset', 25)
+      .setSearchParam('limit', 50)
+      .execute()
+      .subscribe((res) => {
+        // Do stuff with res
+      });
+  }
+
+}
+```
+
+
+
+
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Usage](#usage)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
+
+
+
+## Requirements
+
+* Angular 2.x
+* RxJS 5.x
+* Zone.js 0.7.x
+
+
+
+
+
+## Usage
+
+Import it into your module:
+
+```ts
+import { NgModule } from '@angular/core';
+import { RequestBuilderModule } from 'ng-request-builder';
+
+import { MyService } from './my.service.ts';
+
+@NgModule({
+  imports: [
+    RequestBuilderModule
+  ],
+  providers: [
+    MyService
+  ]
+})
+export class MyModule { }
+```
+
+Inject the `RequestBuilderService` service:
+
+```ts
+import { Injectable } from '@angular/core';
+import { RequestBuilderService } from 'ng-request-builder';
+
+@Injectable()
+export class MyService {
+
+  constructor(private RequestBuilderService requestBuilderService) {
+  }
+
+  public doStuff() {
+    this.requestBuilderService
+      .request('http://example.com')
+      .setHeader('Authorization', 'Bearer secret')
+      .setSearchParam('offset', 25)
+      .setSearchParam('limit', 50)
+      .execute()
+      .subscribe((res) => {
+        // Do stuff with res
+      });
+  }
+
+}
 ```
