@@ -3,10 +3,21 @@
   "version": "0.1.0",
   "description": "ng-request-builder",
   "license": "MIT",
-  "repository": "",
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlphaHydrae/ng-request-builder.git"
+  },
+  "author": {
+    "name": "Simon Oulevay (Alpha Hydrae)",
+    "email": "npm@alphahydrae.com"
+  },
   "keywords": [
-    ""
+    "angular",
+    "http",
+    "request",
+    "chain",
+    "chainable",
+    "builder"
   ],
   "files": [
     "dist/**/*.js",
