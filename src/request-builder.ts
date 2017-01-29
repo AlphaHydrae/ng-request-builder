@@ -1,11 +1,30 @@
 import { Headers, Http, Request, RequestMethod, RequestOptions, Response, ResponseContentType, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+/**
+ * Chainable HTTP request builder.
+ *
+ * @example
+ *
+ * ```
+ *
+ * let Observable<Response> = new RequestBuilder(http)
+ *   .url('http://example.com')   // Set the URL
+ *   .body({ foo: 'bar' })        // POST a JSON body with Content-Type application/json
+ *   .execute();                  // Execute the HTTP request
+ * ```
+ */
 export class RequestBuilder {
 
   private http: Http;
   private requestOptions: RequestOptions;
 
+  /**
+   * Constructs a new request builder.
+   *
+   * @param {Http} http - Angular's Http service.
+   * @param {RequestOptions} requestOptions - Optional default options for requests.
+   */
   constructor(http?: Http, requestOptions?: RequestOptions) {
     this.http = http;
 
