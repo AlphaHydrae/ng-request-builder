@@ -1,18 +1,23 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["es6", "dom"],
-    "module": "es6",
-    "moduleResolution": "node",
+    "module": "commonjs",
     "noImplicitAny": true,
-    "outDir": "./lib",
     "preserveConstEnums": true,
-    "removeComments": true,
-    "target": "es5"
+    "removeComments": false,
+    "target": "es5",
+    "sourceMap": false,
+    "outDir": "."
   },
-  "include": [
-    "src/**/*.ts"
+  "angularCompilerOptions": {
+      "genDir": "aot",
+      "skipMetadataEmit": false
+  },
+  "files": [
+    "index.ts"
   ],
   "exclude": [
     "node_modules",

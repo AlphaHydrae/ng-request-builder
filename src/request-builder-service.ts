@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions } from '@angular/http';
 
-import { RequestBuilder } from './';
+import { RequestBuilder } from './request-builder';
 
 @Injectable()
 export class RequestBuilderService {
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private defaultOptions: RequestOptions) {
   }
 
   public request(): RequestBuilder {

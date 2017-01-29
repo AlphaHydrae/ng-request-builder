@@ -7,12 +7,17 @@ export class RequestBuilder {
   private requestUrl: string;
   private requestOptions: RequestOptions;
 
-  constructor(http?: Http) {
+  constructor(http?: Http, requestOptions?: RequestOptions) {
     this.http = http;
-    this.requestOptions = new RequestOptions({
-      headers: new Headers(),
-      search: new URLSearchParams()
-    });
+
+    if (requestOptions) {
+      this.requestOptions = requestOptions;
+    } else {
+      this.requestOptions = new RequestOptions({
+        headers: new Headers(),
+        search: new URLSearchParams()
+      });
+    }
   }
 
   get options(): RequestOptions {
@@ -40,11 +45,19 @@ export class RequestBuilder {
     return this;
   }
 
-  public execute(): Observable<Response> {
+  public execute(http?: Http): Observable<Response> {
     if (!this.requestUrl) {
       throw new Error('Request URL must be set');
     }
 
-    return this.http.request(this.requestUrl, this.requestOptions);
+    if (!http) {
+      if (!this.http) {
+        throw new Error('Http service must be provided at construction or execution');
+      }
+
+      http = this.http;
+    }
+
+    return http.request(this.requestUrl, this.requestOptions);
   }
 }

@@ -9,14 +9,19 @@
     ""
   ],
   "files": [
-    "lib"
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "dist/**/*.metadata.json",
+    "index.js",
+    "index.d.ts",
+    "index.metadata.json"
   ],
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "./index.js",
   "scripts": {
-    "clean": "rimraf lib",
+    "clean": "rimraf dist",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
-    "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "build": "npm run clean && copy src/**/*.ts dist && npm run lint && echo Using TypeScript && tsc --version && ngc -p tsconfig.json",
+    "build:index": "ngc -p tsconfig.index.json",
     "test:unit": "karma start",
     "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*.spec.ts",
     "watch": "npm run build -- --watch",
@@ -34,6 +39,7 @@
   "devDependencies": {
     "@angular/common": "^2.4.5",
     "@angular/compiler": "^2.4.5",
+    "@angular/compiler-cli": "^2.4.5",
     "@angular/core": "^2.4.5",
     "@angular/http": "^2.4.5",
     "@angular/platform-browser": "^2.4.5",
@@ -42,12 +48,14 @@
     "@types/jasmine": "^2.5.41",
     "@types/node": "6.0.31",
     "chai": "^3.5.0",
+    "copy": "^0.3.0",
     "core-js": "^2.4.1",
     "jasmine-core": "^2.5.2",
     "karma": "^1.4.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-jasmine": "^1.1.0",
     "karma-typescript": "^2.1.7",
+    "reflect-metadata": "^0.1.9",
     "rimraf": "^2.0.0",
     "rxjs": "^5.0.3",
     "ts-node": "^1.0.0",

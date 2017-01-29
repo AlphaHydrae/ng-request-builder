@@ -1,3 +1,8 @@
-coverage/
-node_modules/
-npm-debug.log
+/aot
+/coverage
+/dist
+/index.js
+/index.d.ts
+/index.metadata.json
+/node_modules
+/npm-debug.log
