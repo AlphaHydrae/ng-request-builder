@@ -2,6 +2,7 @@
   "extends": "tslint:latest",
   "rules": {
     "quotemark": [true, "single", "jsx-double", "avoid-escape"],
+    "max-line-length": [false],
     "trailing-comma": [true, {"multiline": "never", "singleline": "never"}]
   }
 }

@@ -13,8 +13,8 @@
     "outDir": "."
   },
   "angularCompilerOptions": {
-      "genDir": "aot",
-      "skipMetadataEmit": false
+    "genDir": "aot",
+    "skipMetadataEmit": false
   },
   "files": [
     "index.ts"
