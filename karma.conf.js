@@ -1,6 +1,6 @@
 module.exports = function(config) {
   config.set({
-    frameworks: ['mocha', 'karma-typescript'],
+    frameworks: [ 'mocha', 'karma-typescript' ],
     files: [
       { pattern: 'node_modules/zone.js/dist/zone.js' },
       { pattern: 'node_modules/reflect-metadata/Reflect.js' },
@@ -8,10 +8,10 @@ module.exports = function(config) {
       { pattern: 'spec/**/*.ts' }
     ],
     preprocessors: {
-      'spec/**/*.ts': ['karma-typescript'],
-      'src/**/*.ts': ['karma-typescript']
+      'spec/**/*.ts': [ 'karma-typescript' ],
+      'src/**/*.ts': [ 'karma-typescript' ]
     },
-    reporters: ['progress', 'karma-typescript'],
-    browsers: ['Chrome']
+    reporters: [ 'karma-typescript', 'mocha' ],
+    browsers: [ 'Chrome' ]
   });
 };

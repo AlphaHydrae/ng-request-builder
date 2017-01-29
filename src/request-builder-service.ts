@@ -10,7 +10,7 @@ export class RequestBuilderService {
   }
 
   public request(): RequestBuilder {
-    return new RequestBuilder(this.http);
+    return new RequestBuilder(this.http, this.defaultOptions);
   }
 
 }
