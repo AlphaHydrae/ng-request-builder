@@ -2,7 +2,7 @@
 
 > A chainable HTTP request builder for Angular.
 
-```js
+```ts
 import { Injectable } from '@angular/core';
 import { RequestBuilderService } from 'ng-request-builder';
 
