@@ -1,6 +1,6 @@
 module.exports = function(config) {
   config.set({
-    frameworks: ['jasmine', 'karma-typescript'],
+    frameworks: ['mocha', 'karma-typescript'],
     files: [
       { pattern: 'node_modules/zone.js/dist/zone.js' },
       { pattern: 'node_modules/reflect-metadata/Reflect.js' },
