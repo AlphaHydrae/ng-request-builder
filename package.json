@@ -29,6 +29,7 @@
     "lint": "tslint --format verbose index.ts \"src/**/*.ts\"",
     "build": "npm run clean:build && npm run lint && echo Using TypeScript && tsc --version && ngc -p tsconfig.json && copy package.json dist/",
     "build:docs": "typedoc --out ./docs --target ES6 --tsconfig tsconfig.json --excludeExternals --excludePrivate --mode file \"src/**/*.ts\"",
+    "prepublish": "npm run build",
     "test": "npm run lint && karma start --single-run",
     "watch": "concurrently \"npm run watch:docs\" \"npm run watch:test\"",
     "watch:docs": "npm run docs && onchange \"src/**/*.ts\" -- npm run build:docs",
