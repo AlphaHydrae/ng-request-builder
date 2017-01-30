@@ -7,7 +7,7 @@ import { MockBackend } from '@angular/http/testing';
 import * as chai from 'chai';
 import * as _ from 'lodash';
 
-import { RequestBuilder } from '../src/ng-request-builder';
+import { RequestBuilder } from '../src/request-builder';
 
 const expect = chai.expect;
 

@@ -6,7 +6,8 @@ import { ConnectionBackend, Http, RequestOptions, BaseRequestOptions } from '@an
 import { MockBackend } from '@angular/http/testing';
 import * as chai from 'chai';
 
-import { RequestBuilder, RequestBuilderService } from '../src/ng-request-builder';
+import { RequestBuilder } from '../src/request-builder';
+import { RequestBuilderService } from '../src/request-builder-service';
 
 const expect = chai.expect;
 
