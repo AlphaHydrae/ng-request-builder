@@ -1,12 +1,14 @@
 {
   "name": "ng-request-builder",
   "version": "0.1.1",
-  "description": "ng-request-builder",
+  "description": "Angular chainable HTTP request builder",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/AlphaHydrae/ng-request-builder.git"
   },
+  "homepage": "https://github.com/AlphaHydrae/ng-request-builder",
+  "bugs": "https://github.com/AlphaHydrae/ng-request-builder/issues",
   "author": {
     "name": "Simon Oulevay (Alpha Hydrae)",
     "email": "npm@alphahydrae.com"
@@ -19,32 +21,19 @@
     "chainable",
     "builder"
   ],
-  "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts",
-    "dist/**/*.metadata.json",
-    "index.js",
-    "index.d.ts",
-    "index.metadata.json"
-  ],
   "main": "./index.js",
   "scripts": {
     "clean:build": "rimraf dist",
-    "dist": "copy src/**/*.ts dist",
     "docs": "rimraf docs && npm run build:docs",
     "doctoc": "doctoc --github README.md",
     "lint": "tslint --format verbose index.ts \"src/**/*.ts\"",
-    "build": "npm run clean:build && npm run dist && npm run lint && echo Using TypeScript && tsc --version && ngc -p tsconfig.json",
-    "build:docs": "npm run dist && typedoc --out ./docs --target ES6 --tsconfig tsconfig.json \"src/**/*.ts\"",
+    "build": "npm run clean:build && npm run lint && echo Using TypeScript && tsc --version && ngc -p tsconfig.json && copy package.json dist/",
+    "build:docs": "typedoc --out ./docs --target ES6 --tsconfig tsconfig.json --excludeExternals --excludePrivate --mode file \"src/**/*.ts\"",
     "test": "npm run lint && karma start --single-run",
     "watch": "concurrently \"npm run watch:docs\" \"npm run watch:test\"",
     "watch:docs": "npm run docs && onchange \"src/**/*.ts\" -- npm run build:docs",
     "watch:test": "karma start"
   },
-  "watch": {
-    "docs": "src/*.ts"
-  },
-  "dependencies": {},
   "peerDependencies": {
     "@angular/common": "^2.0.0",
     "zone.js": "~0.7.0",

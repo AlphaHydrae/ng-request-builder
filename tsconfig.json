@@ -10,14 +10,15 @@
     "removeComments": false,
     "target": "es5",
     "sourceMap": false,
-    "outDir": "."
+    "outDir": "./dist"
   },
   "angularCompilerOptions": {
     "genDir": "aot",
     "skipMetadataEmit": false
   },
-  "files": [
-    "index.ts"
+  "include": [
+    "index.ts",
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",
