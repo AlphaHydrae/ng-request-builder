@@ -50,9 +50,9 @@ export class MyService {
 
 ## Requirements
 
-* Angular 2.x
-* RxJS 5.x
-* Zone.js 0.7.x
+* Angular 2+
+* RxJS 5+
+* Zone.js 0.7+
 
 
 
