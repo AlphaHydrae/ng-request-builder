@@ -1,6 +1,6 @@
 {
   "name": "ng-request-builder",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Angular chainable HTTP request builder",
   "private": true,
   "license": "MIT",
