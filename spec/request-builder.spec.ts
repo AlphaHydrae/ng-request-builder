@@ -9,6 +9,8 @@ import * as _ from 'lodash';
 import { Observable } from 'rxjs/Rx';
 import URI from 'urijs';
 
+import 'rxjs/add/operator/do';
+
 import './imports.spec';
 import { ObservableInterceptor } from '../src/observable-interceptor';
 import { RequestBuilder, RequestBuilderOptions } from '../src/request-builder';
@@ -114,29 +116,33 @@ describe('RequestBuilder', () => {
     const interceptor1: ObservableInterceptor = {
       onRequest(observable: Observable<Response>) {
         interceptorsCalled.push(1);
-        observable.subscribe(response => interceptorsResponses.push(response.json()));
+        return observable.do(response => interceptorsResponses.push(response.json()));
       }
     };
 
     const interceptor2 = (observable: Observable<Response>) => {
       interceptorsCalled.push(2);
-      observable.subscribe(response => interceptorsResponses.push(response.json()));
+      return observable.do(response => interceptorsResponses.push(response.json()));
     };
 
     const interceptor3 = (observable: Observable<Response>) => {
       interceptorsCalled.push(3);
-      observable.subscribe(response => interceptorsResponses.push(response.json()));
+      return observable.do(response => interceptorsResponses.push(response.json()));
     };
 
     const builderOptions = {
       observableInterceptors: [ interceptor1, interceptor2 ]
     };
 
-    newBuilder(builderOptions).url('http://example.com/path').interceptor(interceptor3).execute();
+    const observable = newBuilder(builderOptions).url('http://example.com/path').interceptor(interceptor3).execute();
     expectRequest(RequestMethod.Get, 'http://example.com/path')
 
     expect(interceptorsCalled).to.eql([ 1, 2, 3 ]);
     expect(interceptorsResponses).to.be.empty;
+
+    observable.subscribe(response => {
+      expect(response.json()).to.eql({ foo: 'bar' });
+    });
 
     lastConnection.mockRespond(new Response(new ResponseOptions({
       body: JSON.stringify({ foo: 'bar' })

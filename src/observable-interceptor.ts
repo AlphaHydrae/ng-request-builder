@@ -2,17 +2,17 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 export interface ObservableInterceptor {
-  onRequest(observable: Observable<Response>): void;
+  onRequest(observable: Observable<Response>): Observable<Response>;
 }
 
-export type ObservableInterceptorFunc = (observable: Observable<Response>) => void;
+export type ObservableInterceptorFunc = (observable: Observable<Response>) => Observable<Response>;
 
 export type ObservableInterceptorType = ObservableInterceptor | ObservableInterceptorFunc;
 
-export function callObservableInterceptor(interceptor: ObservableInterceptorType, observable: Observable<Response>) {
+export function callObservableInterceptor(interceptor: ObservableInterceptorType, observable: Observable<Response>): Observable<Response> {
   if (typeof(interceptor) === 'function') {
-    interceptor(observable);
+    return interceptor(observable);
   } else {
-    interceptor.onRequest(observable);
+    return interceptor.onRequest(observable);
   }
 }

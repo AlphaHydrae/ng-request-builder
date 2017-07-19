@@ -298,11 +298,13 @@ export class RequestBuilder {
       throw new Error('An URL must be set');
     }
 
-    const observable: Observable<Response> = http.request(this.requestOptions.url, this.requestOptions);
+    let observable: Observable<Response> = http.request(this.requestOptions.url, this.requestOptions);
 
     // Call all registered observable interceptors
     if (this.observableInterceptors.length) {
-      this.observableInterceptors.forEach(interceptor => callObservableInterceptor(interceptor, observable));
+      this.observableInterceptors.forEach(interceptor => {
+        observable = callObservableInterceptor(interceptor, observable);
+      });
     }
 
     return observable;
