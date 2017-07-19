@@ -1,6 +1,8 @@
 import { Headers, Http, Request, RequestMethod, RequestOptions, Response, ResponseContentType, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { mergeRequestOptions } from './utils';
+
 /**
  * Chainable HTTP request builder.
  *
@@ -40,11 +42,13 @@ export class RequestBuilder {
    */
   constructor(http?: Http, requestOptions?: RequestOptions) {
     this.http = http;
-    this.requestOptions = new RequestOptions({ headers: new Headers(), search: new URLSearchParams() });
 
-    if (requestOptions) {
-      this.requestOptions = this.requestOptions.merge(requestOptions);
-    }
+    const baseRequestOptions = new RequestOptions({
+      headers: new Headers(),
+      search: new URLSearchParams()
+    });
+
+    this.requestOptions = mergeRequestOptions(baseRequestOptions, requestOptions);
 
     if (!this.requestOptions.method) {
       this.requestOptions.method = RequestMethod.Get;
