@@ -123,14 +123,19 @@ describe('RequestBuilder', () => {
       observable.subscribe(response => interceptorsResponses.push(response.json()));
     };
 
+    const interceptor3 = (observable: Observable<Response>) => {
+      interceptorsCalled.push(3);
+      observable.subscribe(response => interceptorsResponses.push(response.json()));
+    };
+
     const builderOptions = {
       observableInterceptors: [ interceptor1, interceptor2 ]
     };
 
-    newBuilder(builderOptions).url('http://example.com/path').execute();
+    newBuilder(builderOptions).url('http://example.com/path').interceptor(interceptor3).execute();
     expectRequest(RequestMethod.Get, 'http://example.com/path')
 
-    expect(interceptorsCalled).to.eql([ 1, 2 ]);
+    expect(interceptorsCalled).to.eql([ 1, 2, 3 ]);
     expect(interceptorsResponses).to.be.empty;
 
     lastConnection.mockRespond(new Response(new ResponseOptions({
@@ -140,6 +145,7 @@ describe('RequestBuilder', () => {
     tick();
 
     expect(interceptorsResponses).to.eql([
+      { foo: 'bar' },
       { foo: 'bar' },
       { foo: 'bar' }
     ]);

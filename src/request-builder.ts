@@ -267,6 +267,11 @@ export class RequestBuilder {
     return this;
   }
 
+  public interceptor(interceptor: ObservableInterceptorType): RequestBuilder {
+    this.observableInterceptors.push(interceptor);
+    return this;
+  }
+
   /**
    * Executes the configured HTTP request.
    *
