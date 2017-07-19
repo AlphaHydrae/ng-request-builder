@@ -1,6 +1,8 @@
 {
   "extends": "tslint:latest",
   "rules": {
+    "arrow-parens": [false],
+    "interface-name": [false],
     "quotemark": [true, "single", "jsx-double", "avoid-escape"],
     "max-line-length": [false],
     "trailing-comma": [true, {"multiline": "never", "singleline": "never"}]
