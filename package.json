@@ -31,6 +31,7 @@
     "build": "npm run clean:build && npm run lint && echo Using TypeScript && tsc --version && ngc -p tsconfig.json && node prepublish.js",
     "build:docs": "typedoc --out ./docs --target ES6 --tsconfig tsconfig.json --excludeExternals --excludePrivate --mode file \"src/**/*.ts\"",
     "prepublish": "echo \"Run npm run build && npm publish dist\" && echo",
+    "start": "npm run build:docs && npm run watch",
     "test": "npm run lint && karma start --single-run",
     "watch": "concurrently \"npm run watch:docs\" \"npm run watch:test\"",
     "watch:docs": "npm run docs && onchange \"src/**/*.ts\" -- npm run build:docs",
