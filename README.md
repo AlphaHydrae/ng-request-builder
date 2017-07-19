@@ -3,6 +3,7 @@
 [![npm version](https://badge.fury.io/js/ng-request-builder.svg)](https://badge.fury.io/js/ng-request-builder)
 [![Dependency Status](https://gemnasium.com/badges/github.com/AlphaHydrae/ng-request-builder.svg)](https://gemnasium.com/github.com/AlphaHydrae/ng-request-builder)
 [![Build Status](https://travis-ci.org/AlphaHydrae/ng-request-builder.svg?branch=master)](https://travis-ci.org/AlphaHydrae/ng-request-builder)
+[![License](https://img.shields.io/npm/l/ng-request-builder.svg)](LICENSE.txt)
 
 > A chainable HTTP request builder for Angular.
 
