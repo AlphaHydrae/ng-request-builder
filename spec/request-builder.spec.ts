@@ -80,7 +80,7 @@ describe('RequestBuilder', () => {
     expectRequest(RequestMethod.Put, 'http://example.com/path', JSON.stringify(sampleBody), { 'Content-Type': 'application/json' });
   });
 
-  it.only('should copy the request options provided at construction', () => {
+  it('should copy the request options provided at construction', () => {
 
     const defaultRequestOptions = new RequestOptions({
       headers: new Headers({ Foo: 'Bar' }),
