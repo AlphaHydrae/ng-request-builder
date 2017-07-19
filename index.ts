@@ -5,6 +5,7 @@ import { RequestBuilderService } from './src/request-builder-service';
 
 export * from './src/request-builder';
 export * from './src/request-builder-service';
+export * from './src/observable-interceptor';
 
 @NgModule({
   providers: [

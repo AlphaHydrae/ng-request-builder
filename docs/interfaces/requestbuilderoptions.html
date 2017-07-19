@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>RequestBuilderModule | ng-request-builder</title>
+	<title>RequestBuilderOptions | ng-request-builder</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="requestbuildermodule.html">RequestBuilderModule</a>
+					<a href="requestbuilderoptions.html">RequestBuilderOptions</a>
 				</li>
 			</ul>
-			<h1>Class RequestBuilderModule</h1>
+			<h1>Interface RequestBuilderOptions</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">RequestBuilderModule</span>
+						<span class="target">RequestBuilderOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -77,32 +77,36 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Methods</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="requestbuildermodule.html#forroot" class="tsd-kind-icon">for<wbr>Root</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="requestbuilderoptions.html#defaultrequestoptions" class="tsd-kind-icon">default<wbr>Request<wbr>Options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="requestbuilderoptions.html#observableinterceptors" class="tsd-kind-icon">observable<wbr>Interceptors</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="forroot" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> for<wbr>Root</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">for<wbr>Root<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ModuleWithProviders</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/AlphaHydrae/ng-request-builder/blob/897b10a/index.ts#L17">index.ts:17</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ModuleWithProviders</span></h4>
-						</li>
-					</ul>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="defaultrequestoptions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> default<wbr>Request<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Request<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RequestOptions</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/AlphaHydrae/ng-request-builder/blob/897b10a/src/request-builder.ts#L308">src/request-builder.ts:308</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="observableinterceptors" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> observable<wbr>Interceptors</h3>
+					<div class="tsd-signature tsd-kind-icon">observable<wbr>Interceptors<span class="tsd-signature-symbol">:</span> <a href="../globals.html#observableinterceptortype" class="tsd-signature-type">ObservableInterceptorType</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/AlphaHydrae/ng-request-builder/blob/897b10a/src/request-builder.ts#L309">src/request-builder.ts:309</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -117,29 +121,32 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
-						<a href="requestbuilder.html" class="tsd-kind-icon">Request<wbr>Builder</a>
+						<a href="../classes/requestbuilder.html" class="tsd-kind-icon">Request<wbr>Builder</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/requestbuildermodule.html" class="tsd-kind-icon">Request<wbr>Builder<wbr>Module</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/requestbuilderservice.html" class="tsd-kind-icon">Request<wbr>Builder<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="observableinterceptor.html" class="tsd-kind-icon">Observable<wbr>Interceptor</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class">
-						<a href="requestbuildermodule.html" class="tsd-kind-icon">Request<wbr>Builder<wbr>Module</a>
+					<li class="current tsd-kind-interface">
+						<a href="requestbuilderoptions.html" class="tsd-kind-icon">Request<wbr>Builder<wbr>Options</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="requestbuildermodule.html#forroot" class="tsd-kind-icon">for<wbr>Root</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="requestbuilderoptions.html#defaultrequestoptions" class="tsd-kind-icon">default<wbr>Request<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="requestbuilderoptions.html#observableinterceptors" class="tsd-kind-icon">observable<wbr>Interceptors</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="requestbuilderservice.html" class="tsd-kind-icon">Request<wbr>Builder<wbr>Service</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/observableinterceptor.html" class="tsd-kind-icon">Observable<wbr>Interceptor</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/requestbuilderoptions.html" class="tsd-kind-icon">Request<wbr>Builder<wbr>Options</a>
-					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#observableinterceptorfunc" class="tsd-kind-icon">Observable<wbr>Interceptor<wbr>Func</a>
 					</li>

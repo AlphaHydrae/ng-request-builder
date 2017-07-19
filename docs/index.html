@@ -65,12 +65,13 @@
 				<h1 id="angular-request-builder">Angular Request Builder</h1>
 				<p><a href="https://badge.fury.io/js/ng-request-builder"><img src="https://badge.fury.io/js/ng-request-builder.svg" alt="npm version"></a>
 					<a href="https://gemnasium.com/github.com/AlphaHydrae/ng-request-builder"><img src="https://gemnasium.com/badges/github.com/AlphaHydrae/ng-request-builder.svg" alt="Dependency Status"></a>
-				<a href="https://travis-ci.org/AlphaHydrae/ng-request-builder"><img src="https://travis-ci.org/AlphaHydrae/ng-request-builder.svg?branch=master" alt="Build Status"></a></p>
+					<a href="https://travis-ci.org/AlphaHydrae/ng-request-builder"><img src="https://travis-ci.org/AlphaHydrae/ng-request-builder.svg?branch=master" alt="Build Status"></a>
+				<a href="LICENSE.txt"><img src="https://img.shields.io/npm/l/ng-request-builder.svg" alt="License"></a></p>
 				<blockquote>
 					<p>A chainable HTTP request builder for Angular.</p>
 				</blockquote>
-				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { Injectable } from <span class="hljs-string">'@angular/core'</span>;
-<span class="hljs-keyword">import</span> { RequestBuilderService } from <span class="hljs-string">'ng-request-builder'</span>;
+				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { RequestBuilderService } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-request-builder'</span>;
 
 <span class="hljs-meta">@Injectable</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyService {
@@ -85,7 +86,7 @@
       .setSearchParam(<span class="hljs-string">'offset'</span>, <span class="hljs-number">25</span>)
       .setSearchParam(<span class="hljs-string">'limit'</span>, <span class="hljs-number">50</span>)
       .execute()
-      .subscribe((res) =&gt; {
+      .subscribe(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
         <span class="hljs-comment">// Do stuff with res</span>
       });
   }
@@ -101,16 +102,16 @@
 				<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 				<h2 id="requirements">Requirements</h2>
 				<ul>
-					<li>Angular 2.x</li>
-					<li>RxJS 5.x</li>
-					<li>Zone.js 0.7.x</li>
+					<li>Angular 2+</li>
+					<li>RxJS 5+</li>
+					<li>Zone.js 0.7+</li>
 				</ul>
 				<h2 id="usage">Usage</h2>
 				<p>Import it into your module:</p>
-				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { NgModule } from <span class="hljs-string">'@angular/core'</span>;
-<span class="hljs-keyword">import</span> { RequestBuilderModule } from <span class="hljs-string">'ng-request-builder'</span>;
+				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { NgModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { RequestBuilderModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-request-builder'</span>;
 
-<span class="hljs-keyword">import</span> { MyService } from <span class="hljs-string">'./my.service.ts'</span>;
+<span class="hljs-keyword">import</span> { MyService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./my.service.ts'</span>;
 
 <span class="hljs-meta">@NgModule</span>({
   imports: [
@@ -123,8 +124,8 @@
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyModule { }
 </code></pre>
 				<p>Inject the <code>RequestBuilderService</code> service:</p>
-				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { Injectable } from <span class="hljs-string">'@angular/core'</span>;
-<span class="hljs-keyword">import</span> { RequestBuilderService } from <span class="hljs-string">'ng-request-builder'</span>;
+				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { RequestBuilderService } <span class="hljs-keyword">from</span> <span class="hljs-string">'ng-request-builder'</span>;
 
 <span class="hljs-meta">@Injectable</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyService {
@@ -139,7 +140,7 @@
       .setSearchParam(<span class="hljs-string">'offset'</span>, <span class="hljs-number">25</span>)
       .setSearchParam(<span class="hljs-string">'limit'</span>, <span class="hljs-number">50</span>)
       .execute()
-      .subscribe((res) =&gt; {
+      .subscribe(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
         <span class="hljs-comment">// Do stuff with res</span>
       });
   }
@@ -166,6 +167,24 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/requestbuilderservice.html" class="tsd-kind-icon">Request<wbr>Builder<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/observableinterceptor.html" class="tsd-kind-icon">Observable<wbr>Interceptor</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/requestbuilderoptions.html" class="tsd-kind-icon">Request<wbr>Builder<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#observableinterceptorfunc" class="tsd-kind-icon">Observable<wbr>Interceptor<wbr>Func</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#observableinterceptortype" class="tsd-kind-icon">Observable<wbr>Interceptor<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#callobservableinterceptor" class="tsd-kind-icon">call<wbr>Observable<wbr>Interceptor</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#mergerequestoptions" class="tsd-kind-icon">merge<wbr>Request<wbr>Options</a>
 					</li>
 				</ul>
 			</nav>

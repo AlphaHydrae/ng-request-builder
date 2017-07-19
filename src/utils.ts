@@ -10,14 +10,14 @@ export function mergeRequestOptions(requestOptions: RequestOptions, requestOptio
   mergedRequestOptions.headers = requestOptions.headers || new Headers();
   if (requestOptionsToMerge.headers) {
     requestOptionsToMerge.headers.forEach((values: string[], name: string) => {
-      values.forEach((value) => mergedRequestOptions.headers.append(name, value));
+      values.forEach(value => mergedRequestOptions.headers.append(name, value));
     });
   }
 
   mergedRequestOptions.search = requestOptions.search || new URLSearchParams();
   if (requestOptionsToMerge.search) {
     requestOptionsToMerge.search.paramsMap.forEach((values: string[], name: string) => {
-      values.forEach((value) => mergedRequestOptions.search.append(name, value));
+      values.forEach(value => mergedRequestOptions.search.append(name, value));
     });
   }
 

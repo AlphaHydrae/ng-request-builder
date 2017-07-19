@@ -1,20 +1,23 @@
 /// <reference path="../node_modules/typescript/lib/lib.es6.d.ts" />
 import { By } from '@angular/platform-browser';
 import { DebugElement, ReflectiveInjector } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ConnectionBackend, Headers, Http, RequestOptions, BaseRequestOptions, Request, RequestMethod, URLSearchParams } from '@angular/http';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ConnectionBackend, Headers, Http, RequestOptions, BaseRequestOptions, Request, RequestMethod, Response, ResponseOptions, URLSearchParams } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 import * as chai from 'chai';
 import * as _ from 'lodash';
+import { Observable } from 'rxjs/Rx';
 import URI from 'urijs';
 
-import { RequestBuilder } from '../src/request-builder';
+import './imports.spec';
+import { ObservableInterceptor } from '../src/observable-interceptor';
+import { RequestBuilder, RequestBuilderOptions } from '../src/request-builder';
 
 const expect = chai.expect;
 
 describe('RequestBuilder', () => {
 
-  let checkedRequests, http, lastRequest, requests, sampleBody;
+  let checkedRequests, http, lastConnection, lastRequest, requests, sampleBody;
 
   beforeEach(() => {
 
@@ -31,8 +34,9 @@ describe('RequestBuilder', () => {
 
     http = injector.get(Http);
 
-    let backend = injector.get(ConnectionBackend) as MockBackend;
+    const backend = injector.get(ConnectionBackend) as MockBackend;
     backend.connections.subscribe((connection: any) => {
+      lastConnection = connection;
       lastRequest = connection ? connection.request : null
       if (lastRequest) {
         requests.push(lastRequest);
@@ -89,14 +93,57 @@ describe('RequestBuilder', () => {
 
     defaultRequestOptions.search.set('fooo', 'baar');
 
-    newBuilder(defaultRequestOptions).url('http://example.com/path').header('Baz', 'Qux').search('baaz', 'quux').execute();
+    const builderOptions = {
+      defaultRequestOptions: defaultRequestOptions
+    };
+
+    newBuilder(builderOptions).url('http://example.com/path').header('Baz', 'Qux').search('baaz', 'quux').execute();
     expectRequestAt(0, RequestMethod.Get, 'http://example.com/path', null, { Foo: 'Bar', Baz: 'Qux' }, { fooo: 'baar', baaz: 'quux' });
 
-    newBuilder(defaultRequestOptions).url('http://example.com/path').header('Corge', 'Grault').search('coorge', 'graault').execute();
+    newBuilder(builderOptions).url('http://example.com/path').header('Corge', 'Grault').search('coorge', 'graault').execute();
     expectRequestAt(1, RequestMethod.Get, 'http://example.com/path', null, { Foo: 'Bar', Corge: 'Grault' }, { fooo: 'baar', coorge: 'graault' });
 
     expectNoMoreRequests();
   });
+
+  it('should call registered observable interceptors', fakeAsync(() => {
+
+    const interceptorsCalled = [];
+    const interceptorsResponses = [];
+
+    const interceptor1: ObservableInterceptor = {
+      onRequest(observable: Observable<Response>) {
+        interceptorsCalled.push(1);
+        observable.subscribe(response => interceptorsResponses.push(response.json()));
+      }
+    };
+
+    const interceptor2 = (observable: Observable<Response>) => {
+      interceptorsCalled.push(2);
+      observable.subscribe(response => interceptorsResponses.push(response.json()));
+    };
+
+    const builderOptions = {
+      observableInterceptors: [ interceptor1, interceptor2 ]
+    };
+
+    newBuilder(builderOptions).url('http://example.com/path').execute();
+    expectRequest(RequestMethod.Get, 'http://example.com/path')
+
+    expect(interceptorsCalled).to.eql([ 1, 2 ]);
+    expect(interceptorsResponses).to.be.empty;
+
+    lastConnection.mockRespond(new Response(new ResponseOptions({
+      body: JSON.stringify({ foo: 'bar' })
+    })));
+
+    tick();
+
+    expect(interceptorsResponses).to.eql([
+      { foo: 'bar' },
+      { foo: 'bar' }
+    ]);
+  }));
 
   it('should throw an error if the Http service is not given at construction or execution', () => {
     expect(() => new RequestBuilder().url('http://example.com/path').execute()).to.throw('Http service must be provided at construction or execution');
@@ -106,8 +153,8 @@ describe('RequestBuilder', () => {
     expect(() => newBuilder().execute()).to.throw('An URL must be set');
   });
 
-  function newBuilder(requestOptions?: RequestOptions) {
-    return new RequestBuilder(http, requestOptions);
+  function newBuilder(builderOptions?: RequestBuilderOptions) {
+    return new RequestBuilder(http, builderOptions);
   }
 
   function expectRequest(method: RequestMethod, url: string, body?: any, headers?: { [s: string]: string | Array<string> }, search?: { [s: string]: string | Array<string> }) {

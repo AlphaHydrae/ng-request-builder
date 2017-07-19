@@ -6,6 +6,7 @@ import { ConnectionBackend, Http, RequestOptions, BaseRequestOptions } from '@an
 import { MockBackend } from '@angular/http/testing';
 import * as chai from 'chai';
 
+import './imports.spec';
 import { RequestBuilder } from '../src/request-builder';
 import { RequestBuilderService } from '../src/request-builder-service';
 

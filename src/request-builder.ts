@@ -1,6 +1,7 @@
 import { Headers, Http, Request, RequestMethod, RequestOptions, Response, ResponseContentType, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { callObservableInterceptor, ObservableInterceptorType } from './observable-interceptor';
 import { mergeRequestOptions } from './utils';
 
 /**
@@ -33,6 +34,10 @@ export class RequestBuilder {
    * The RequestOptions with which the HTTP request will be performed when `execute` is called.
    */
   private requestOptions: RequestOptions;
+   /**
+    * Interceptors which will be called with the observable of each request triggered from this builder.
+    */
+  private observableInterceptors: ObservableInterceptorType[];
 
   /**
    * Constructs a new request builder.
@@ -40,7 +45,7 @@ export class RequestBuilder {
    * @param http Angular's Http service, used to perform the HTTP request when [[execute]] is called.
    * @param requestOptions Default options for requests.
    */
-  constructor(http?: Http, requestOptions?: RequestOptions) {
+  constructor(http?: Http, options: RequestBuilderOptions = {}) {
     this.http = http;
 
     const baseRequestOptions = new RequestOptions({
@@ -48,11 +53,12 @@ export class RequestBuilder {
       search: new URLSearchParams()
     });
 
-    this.requestOptions = mergeRequestOptions(baseRequestOptions, requestOptions);
-
+    this.requestOptions = mergeRequestOptions(baseRequestOptions, options.defaultRequestOptions);
     if (!this.requestOptions.method) {
       this.requestOptions.method = RequestMethod.Get;
     }
+
+    this.observableInterceptors = options.observableInterceptors || [];
   }
 
   /**
@@ -287,6 +293,18 @@ export class RequestBuilder {
       throw new Error('An URL must be set');
     }
 
-    return http.request(this.requestOptions.url, this.requestOptions);
+    const observable: Observable<Response> = http.request(this.requestOptions.url, this.requestOptions);
+
+    // Call all registered observable interceptors
+    if (this.observableInterceptors.length) {
+      this.observableInterceptors.forEach(interceptor => callObservableInterceptor(interceptor, observable));
+    }
+
+    return observable;
   }
+}
+
+export interface RequestBuilderOptions {
+  defaultRequestOptions?: RequestOptions;
+  observableInterceptors?: ObservableInterceptorType[];
 }
