@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestMethod, RequestOptions } from '@angular/http';
 
-import { RequestBuilder } from './request-builder';
+import { RequestBuilder, RequestBuilderOptions } from './request-builder';
 
 /**
  * An Angular service to easily create [[RequestBuilder]] objects.
@@ -30,6 +30,7 @@ import { RequestBuilder } from './request-builder';
  */
 @Injectable()
 export class RequestBuilderService {
+  private builderOptions: RequestBuilderOptions;
 
   /**
    * Constructs the request builder service.
@@ -38,6 +39,9 @@ export class RequestBuilderService {
    * @param defaultsOptions Default options to apply to all requests.
    */
   constructor(private http: Http, private defaultOptions: RequestOptions) {
+    this.builderOptions = {
+      defaultRequestOptions: defaultOptions
+    };
   }
 
   /**
@@ -50,7 +54,7 @@ export class RequestBuilderService {
    * ```
    */
   public request(url: string): RequestBuilder {
-    return new RequestBuilder(this.http, this.defaultOptions).method(RequestMethod.Get).url(url);
+    return new RequestBuilder(this.http, this.builderOptions).method(RequestMethod.Get).url(url);
   }
 
   /**
